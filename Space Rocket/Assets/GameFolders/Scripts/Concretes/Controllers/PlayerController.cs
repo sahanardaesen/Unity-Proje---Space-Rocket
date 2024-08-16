@@ -8,14 +8,21 @@ namespace SpaceRocket.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private float _rotationSpeed = 10f;
+        [SerializeField] private float _force = 50f;
         private Mover _mover;
         private DefaultInput _defaultInput;
         bool _isForceUp;
+        float _leftRight;
+        Rotater _rotater;
+        public float rotationSpeed => _rotationSpeed;
+        public float force => _force;
 
         private void Awake()
         {
             _defaultInput = new DefaultInput();
-            _mover = new Mover(GetComponent<Rigidbody>());
+            _mover = new Mover(this);
+            _rotater = new Rotater(this);
         }
         private void Start()
         {
@@ -24,6 +31,7 @@ namespace SpaceRocket.Controllers
 
         private void Update()
         {
+            Debug.Log(_defaultInput.leftRight);
             if (_defaultInput.isForceUp)
             {
                 _isForceUp = true;
@@ -32,6 +40,8 @@ namespace SpaceRocket.Controllers
             {
                 _isForceUp = false;
             }
+
+            _leftRight = _defaultInput.leftRight;
         }
 
         private void FixedUpdate() {
@@ -40,6 +50,7 @@ namespace SpaceRocket.Controllers
                 Debug.Log("FixedUpdate");
                 _mover.FixedTick();
             }
+            _rotater.FixedTick(_leftRight);
         }
     }
 }
