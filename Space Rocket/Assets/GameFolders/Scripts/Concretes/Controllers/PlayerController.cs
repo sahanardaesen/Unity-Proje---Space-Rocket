@@ -17,38 +17,35 @@ namespace SpaceRocket.Controllers
         Rotater _rotater;
         public float rotationSpeed => _rotationSpeed;
         public float force => _force;
+        Fuel _fuel;
 
         private void Awake()
         {
             _defaultInput = new DefaultInput();
             _mover = new Mover(this);
             _rotater = new Rotater(this);
-        }
-        private void Start()
-        {
-            
+            _fuel = GetComponent<Fuel>();
         }
 
         private void Update()
         {
-            Debug.Log(_defaultInput.leftRight);
-            if (_defaultInput.isForceUp)
+            if (_defaultInput.isForceUp && !_fuel.isEmpty)
             {
                 _isForceUp = true;
             }    
             else
             {
                 _isForceUp = false;
+                _fuel.IncreaseFuel(0.01f);
             }
-
             _leftRight = _defaultInput.leftRight;
         }
 
         private void FixedUpdate() {
             if (_isForceUp)
             {
-                Debug.Log("FixedUpdate");
                 _mover.FixedTick();
+                _fuel.DecreaseFuel(0.1f);
             }
             _rotater.FixedTick(_leftRight);
         }
