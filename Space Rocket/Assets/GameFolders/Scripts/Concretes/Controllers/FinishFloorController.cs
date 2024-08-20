@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SpaceRocket.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,18 +13,11 @@ namespace SpaceRocket.Controllers
            PlayerController player = other.collider.GetComponent<PlayerController>();
             if (player != null && other.GetContact(0).normal.y == -1)
             {
-                Debug.Log("Finish");
                 _particleSystem.Play();
-                //return;
             }
-            // if (other.GetContact(0).normal.y == -1)
-            // {
-            //     Debug.Log("Finish");
-            //     _particleSystem.Play();
-            // }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GameManager.Instance.GameOver();
             }
         }
     }
