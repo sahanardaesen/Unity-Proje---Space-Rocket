@@ -18,7 +18,6 @@ namespace SpaceRocket.Movements
 
         public void FixedTick()
         {
-            Debug.Log("FixedTick");
             _rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * _playerController.force);
         }
     }
