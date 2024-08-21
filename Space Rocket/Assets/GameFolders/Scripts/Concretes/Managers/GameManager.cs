@@ -62,6 +62,7 @@ namespace SpaceRocket.Managers
 
         public void Exit()
         {
+            Debug.Log("Game is closing...");
             Application.Quit();
         }
     }
