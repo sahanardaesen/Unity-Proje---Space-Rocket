@@ -35,14 +35,14 @@ namespace SpaceRocket.Controllers
 
         private void OnEnable()
         {
-            GameManager.Instance.OnGameOver += OnGameOver;
+            GameManager.Instance.OnGameOver += OnGameOverTrigger;
+            GameManager.Instance.OnMissionSucceded += OnGameOverTrigger;
         }
-
         
-
         private void OnDisable()
         {
-            GameManager.Instance.OnGameOver -= OnGameOver;
+            GameManager.Instance.OnGameOver -= OnGameOverTrigger;
+            GameManager.Instance.OnMissionSucceded -= OnGameOverTrigger;
         }
 
         private void Update()
@@ -72,7 +72,7 @@ namespace SpaceRocket.Controllers
             _rotater.FixedTick(_leftRight);
         }
 
-        private void OnGameOver()
+        private void OnGameOverTrigger()
         {
             _canMove = false;
             _isForceUp = false;

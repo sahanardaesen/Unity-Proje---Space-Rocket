@@ -14,6 +14,7 @@ namespace SpaceRocket.Controllers
             if (player != null && other.GetContact(0).normal.y == -1)
             {
                 _particleSystem.Play();
+                GameManager.Instance.MissionSucceded();
             }
             else
             {
