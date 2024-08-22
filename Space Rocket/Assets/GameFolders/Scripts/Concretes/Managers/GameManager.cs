@@ -1,33 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SpaceRocket.Abstracts.Utilities;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace SpaceRocket.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : SingletonThisObject<GameManager>
     {
         public event System.Action OnGameOver;
-        public static GameManager Instance { get; private set; }
         public event System.Action OnMissionSucceded;
 
         private void Awake() {
-            SingletonThisObject();
-        }
-         
-        private void SingletonThisObject()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            SingletonThisGameObject(this);
         }
 
         public void GameOver()
