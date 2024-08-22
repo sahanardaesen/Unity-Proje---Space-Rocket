@@ -11,7 +11,11 @@ namespace SpaceRocket.Controllers
         [SerializeField] ParticleSystem _particleSystem;
         private void OnCollisionEnter(Collision other) {
            PlayerController player = other.collider.GetComponent<PlayerController>();
-            if (player != null && other.GetContact(0).normal.y == -1)
+           if(player == null || !player.canMove)
+            {
+                return;
+            }
+            if (other.GetContact(0).normal.y == -1)
             {
                 _particleSystem.Play();
                 GameManager.Instance.MissionSucceded();

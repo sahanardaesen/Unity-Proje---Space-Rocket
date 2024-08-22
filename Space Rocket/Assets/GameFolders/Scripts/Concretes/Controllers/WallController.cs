@@ -10,7 +10,7 @@ namespace SpaceRocket.Controllers
     {
         private void OnCollisionEnter(Collision other) {
             PlayerController player = other.collider.GetComponent<PlayerController>();
-            if (player != null)
+            if (player != null && player.canMove)
             {
                 GameManager.Instance.GameOver();
             }

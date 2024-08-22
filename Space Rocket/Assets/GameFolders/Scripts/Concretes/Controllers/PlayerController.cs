@@ -18,6 +18,9 @@ namespace SpaceRocket.Controllers
         Rotater _rotater;
         public float rotationSpeed => _rotationSpeed;
         public float force => _force;
+
+        public bool canMove => _canMove;
+
         Fuel _fuel;
         bool _canMove;
 
