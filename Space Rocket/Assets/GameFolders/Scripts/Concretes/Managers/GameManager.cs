@@ -17,6 +17,10 @@ namespace SpaceRocket.Managers
             SingletonThisGameObject(this);
         }
 
+        private void Start() {
+            
+        }
+
         public void GameOver()
         {
             OnGameOver?.Invoke();
@@ -34,7 +38,9 @@ namespace SpaceRocket.Managers
 
         private IEnumerator LoadLevelSceneWithDelay(int levelIndex = 0)
         {
+            SoundManager.Instance.StopSound(1);
             yield return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + levelIndex); 
+            SoundManager.Instance.PlaySound(2);
         }
 
         public void LoadMenuScene()
@@ -44,7 +50,9 @@ namespace SpaceRocket.Managers
 
         private IEnumerator LoadMenuSceneWithDelay()
         {
+            SoundManager.Instance.StopSound(2);
             yield return SceneManager.LoadSceneAsync("MenuScene");
+            SoundManager.Instance.PlaySound(1);
         }
 
         public void Exit()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SpaceRocket.Managers;
 using UnityEngine;
 
 
@@ -24,6 +25,7 @@ namespace SpaceRocket.Movements
             {
                 _particleSystem.Stop();
             }
+            SoundManager.Instance.StopSound(0);
         }
         
         public void DecreaseFuel(float amount)
@@ -35,6 +37,7 @@ namespace SpaceRocket.Movements
             {
                 _particleSystem.Play();
             }
+            SoundManager.Instance.PlaySound(0);
         }
     }
 }
