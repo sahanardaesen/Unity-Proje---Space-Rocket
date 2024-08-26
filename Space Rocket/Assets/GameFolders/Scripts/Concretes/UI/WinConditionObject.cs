@@ -25,7 +25,6 @@ namespace SpaceRocket.UI
 
         private void OnWinConditionHandler()
         {
-            Debug.Log("WinCondition");
             if(!_winConditionPanel.activeSelf) {
                 _winConditionPanel.SetActive(true);
             }

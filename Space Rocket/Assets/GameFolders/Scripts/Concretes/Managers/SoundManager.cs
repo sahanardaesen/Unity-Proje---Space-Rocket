@@ -27,5 +27,37 @@ namespace SpaceRocket.Managers
                 _audioSource[index].Stop();
             }
         }
+
+        public void StopAllSoundsAndPlayExplosion()
+        {
+            for (int i = 0; i < _audioSource.Length; i++)
+            {
+                if(_audioSource[i].isPlaying)
+                {
+                    _audioSource[i].Stop();
+                }
+                else if(i == 3)
+                {
+                    continue;
+                }
+            }
+            _audioSource[3].Play();
+        }
+
+        public void StopAllSoundsAndPlayFinish()
+        {
+            for (int i = 0; i < _audioSource.Length; i++)
+            {
+                if(_audioSource[i].isPlaying)
+                {
+                    _audioSource[i].Stop();
+                }
+                else if(i == 4)
+                {
+                    continue;
+                }
+            }
+            _audioSource[4].Play();
+        }
     }
 }

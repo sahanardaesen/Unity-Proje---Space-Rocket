@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceRocket.Inputs;
 using SpaceRocket.Managers;
 using SpaceRocket.Movements;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SpaceRocket.Controllers
@@ -11,6 +13,7 @@ namespace SpaceRocket.Controllers
     {
         [SerializeField] private float _rotationSpeed = 10f;
         [SerializeField] private float _force = 50f;
+        [SerializeField] ParticleSystem _explosionParticle;
         private Mover _mover;
         private DefaultInput _defaultInput;
         bool _isForceUp;
@@ -23,6 +26,7 @@ namespace SpaceRocket.Controllers
 
         Fuel _fuel;
         bool _canMove;
+        public ParticleSystem explosionParticle => _explosionParticle;
 
         private void Awake()
         {
@@ -70,7 +74,7 @@ namespace SpaceRocket.Controllers
             if (_isForceUp)
             {
                 _mover.FixedTick();
-                _fuel.DecreaseFuel(0.1f);
+                _fuel.DecreaseFuel(0.5f);
             }
             _rotater.FixedTick(_leftRight);
         }
@@ -81,6 +85,19 @@ namespace SpaceRocket.Controllers
             _isForceUp = false;
             _leftRight = 0;
             _fuel.IncreaseFuel(0);
+        }
+
+        private void OnTriggerEnter(Collider other) {
+            if(other.gameObject.CompareTag("FuelBoost"))
+            {
+                FuelBoosted();
+                Destroy(other.gameObject);
+            }
+        }
+
+        private void FuelBoosted()
+        {
+            _fuel.IncreaseFuel(50);
         }
     }
 }

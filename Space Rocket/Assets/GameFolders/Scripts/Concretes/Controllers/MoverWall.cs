@@ -22,7 +22,8 @@ namespace SpaceRocket.Controllers
         private void Update() {
             float cycle = Time.time / _speed;
             float sinWave = Mathf.Sin(cycle * _fullCircle);
-            _factor = Mathf.Abs(sinWave);
+            _factor = sinWave / 2 + 0.5f;
+            //_factor = Mathf.Abs(sinWave);
             Vector3 offset = _direction * _factor;
             transform.position = _startPosition + offset;
         }

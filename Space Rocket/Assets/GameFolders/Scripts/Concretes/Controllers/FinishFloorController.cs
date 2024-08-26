@@ -19,6 +19,7 @@ namespace SpaceRocket.Controllers
             {
                 _particleSystem.Play();
                 GameManager.Instance.MissionSucceded();
+                SoundManager.Instance.StopAllSoundsAndPlayFinish();
             }
             else
             {

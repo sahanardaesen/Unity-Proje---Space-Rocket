@@ -26,7 +26,6 @@ namespace SpaceRocket.UI
 
         private void OnGameOverHandler()
         {
-            Debug.Log("GameOver");
             if(!_gameOverPanel.activeSelf) {
                 _gameOverPanel.SetActive(true);
             }
